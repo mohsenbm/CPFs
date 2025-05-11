@@ -1,7 +1,7 @@
 import numpy as np
 from qiskit.quantum_info import Operator
 from src.utils import operator_norm
-from ising_model_qcircs import *
+from src.ising_model_qcircs import *
 
 
 def PF1_qcirc(A, B, tau, ppart): # ppart here specifies the perturbation part of the Hamiltonian

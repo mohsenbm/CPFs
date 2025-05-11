@@ -1,7 +1,7 @@
 import numpy as np
 from qiskit import QuantumCircuit
 from src.ising_model import spectrum
-from primitive_qcircs import ffft, bogoliubov_transform
+from src.primitive_qcircs import ffft, bogoliubov_transform
 
 def exact_evolution_diagonal_qcirc(J, h, n, t):
     qc = QuantumCircuit(n)  
