@@ -114,21 +114,21 @@ def basis_overlap_qcirc(approxU, exactU, basis=None):
     overlap_measured_qc = overlap_qc.measure_all(inplace=False)
     return overlap_measured_qc
 
-def average_infidelity(approxU, exactU, backend=None, num_shots=10**4):
+def average_infidelity(approxU, exactU, backend=None, nshots=10**4):
     """
     computes average infidility
     """
     nqubits = exactU.num_qubits
-    sampler = Sampler(mode=backend, options={"default_shots":num_shots})
+    sampler = Sampler(mode=backend, options={"default_shots":nshots})
     basis_set = [format(i, '0' + str(nqubits) + 'b') for i in range(2**nqubits)]
     basis_infidelity_set = []
     for basis in basis_set:
         overlap_qc = basis_overlap_qcirc(approxU, exactU, basis)
         overlap_qc = transpile(overlap_qc, backend, optimization_level=2)
-        result = sampler.run([overlap_qc], shots=num_shots).result()
+        result = sampler.run([overlap_qc], shots=nshots).result()
         counts = result[0].data.meas.get_counts()
         allzero_state = '0'*nqubits
-        overlap_allzero_state = counts.get(allzero_state, 0) / num_shots
+        overlap_allzero_state = counts.get(allzero_state, 0) / nshots
         basis_infidelity = 1 - overlap_allzero_state
         basis_infidelity_set.append(basis_infidelity)
     return basis_infidelity_set
