@@ -1,8 +1,11 @@
 cirq==1.5.0
+matplotlib==3.7.2
 numpy==1.24.0
 openfermion==1.7.0
 pandas==2.2.3
+python-dotenv==1.1.0
 qiskit==2.0.0
+qiskit_aer==0.17.0
 qiskit_ibm_runtime==0.39.0
 scipy==1.15.3
 tqdm==4.64.0
