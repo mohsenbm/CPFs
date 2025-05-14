@@ -12,15 +12,33 @@ To install the required packages, run the following command:
 pip install -r requirements.txt
 ```
 
-Add a `.env` file with your IBM token:
+Add a `.env` file with your IBM credentials:
 
 ```bash
 IBM_TOKEN="<your-token>"
+IBMQ_CHANNEL="<your-channel>"
+IBMQ_INSTANCE="<your-instance>"
 ```
+
+In our case, the IBMQ channel is `ibm_quantum`, and the IBMQ instance is `pinq-quebec-hub/univ-toronto/matterlab`.
 
 ### Usage
 
 To reproduce the results of the paper, run the code in the `notebooks` folder. The main logic of the code is in the `src` folder. 
+
+If you want to run the code using a docker container, you can first create the docker image with
+
+```bash
+docker build -t cpfs-image .
+```
+
+Then, run the container with
+
+```bash
+docker run --rm --env-file .env cpfs-image
+```
+
+
 
 ### References
 
