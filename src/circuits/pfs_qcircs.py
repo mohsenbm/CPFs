@@ -1,4 +1,4 @@
-from src.ising_model_qcircs import *
+from src.circuits.ising_model_qcircs import *
 
 
 def PF1_qcirc(A, B, tau, ppart): # ppart here specifies the perturbation part of the Hamiltonian

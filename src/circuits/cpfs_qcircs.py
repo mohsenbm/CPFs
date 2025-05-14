@@ -1,8 +1,8 @@
 import numpy as np
 from qiskit.quantum_info import Operator
 from src.utils import operator_norm
-from src.ising_model_qcircs import *
-from src.PFs_qcircs import *
+from src.circuits.ising_model_qcircs import *
+from src.circuits.pfs_qcircs import *
     
 def X_qcirc(a, b, A, B, tau, ppart):
     """

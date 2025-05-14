@@ -1,13 +1,14 @@
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 # Set working directory inside container
 WORKDIR /app
+ENV PYTHONPATH=/app
 
 # Copy repo contents
 COPY . .
 
-# Install dependencies (if you have requirements.txt)
-RUN pip install --no-cache-dir -r requirements.txt || true
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Run the Python scripts
 CMD python src/experiments/cpfs_compilation.py && \

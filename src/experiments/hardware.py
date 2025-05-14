@@ -30,7 +30,7 @@ service = QiskitRuntimeService(
     token=token)
 
 #backend = service.least_busy(operational=True, simulator=False)
-backend = service.backend(name="ibm_quebec") # add your backend here; backend used is: "ibm_quebec"
+backend = service.backend(name=os.getenv("IBMQ_BACKEND")) # add your backend here; backend used is: "ibm_quebec"
 
 
 pparam = 0.1

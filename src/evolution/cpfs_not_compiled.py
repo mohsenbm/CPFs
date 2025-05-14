@@ -1,9 +1,16 @@
 import numpy as np
 from scipy import linalg
-from tqdm.notebook import tqdm
+
+try:
+    from tqdm.notebook import tqdm
+    import IPython
+    assert IPython.get_ipython() is not None
+except:
+    from tqdm import tqdm
+
 from scipy.special import bernoulli
 from src.utils import operator_norm, mtx_commutator
-from src.PFs import *
+from src.evolution.pfs import *
 
 #============================================================
 # types of correctors

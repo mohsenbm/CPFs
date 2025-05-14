@@ -18,9 +18,10 @@ Add a `.env` file with your IBM credentials:
 IBM_TOKEN="<your-token>"
 IBMQ_CHANNEL="<your-channel>"
 IBMQ_INSTANCE="<your-instance>"
+IBMQ_BACKEND="<your-backend>"
 ```
 
-In our case, the IBMQ channel is `ibm_quantum`, and the IBMQ instance is `pinq-quebec-hub/univ-toronto/matterlab`.
+In our case, the IBMQ channel is `ibm_quantum`, the IBMQ instance is `pinq-quebec-hub/univ-toronto/matterlab`, and the backend is `ibm_quebec`.
 
 ### Usage
 
