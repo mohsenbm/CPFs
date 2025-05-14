@@ -18,6 +18,10 @@ Add a `.env` file with your IBM token:
 IBM_TOKEN="<your-token>"
 ```
 
+### Usage
+
+To reproduce the results of the paper, run the code in the `notebooks` folder. The main logic of the code is in the `src` folder. 
+
 ### References
 
 [1] Bagherimehrab, Mohsen, Luis Mantilla Calderon, Dominic W. Berry, Philipp Schleich, Mohammad Ghazi Vakili, Abdulrahman Aldossary, Jorge A. Angulo, Christoph Gorgulla, and Alan Aspuru-Guzik. "Faster algorithmic quantum and classical simulations by corrected product formulas." arXiv preprint arXiv:2409.08265 (2024).
