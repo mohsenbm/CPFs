@@ -42,6 +42,7 @@ docker run --rm --env-file .env cpfs-image
 ### Contributors
 
 Numerical/classcial simulations: Mohsen Bagherimehrab
+
 Quantum hardware implementations: Mohsen Bagherimehrab and Luis Mantilla Calderon
 
 ### Citation:
