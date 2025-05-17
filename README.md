@@ -44,6 +44,7 @@ docker run --rm --env-file .env cpfs-image
 Numerical/classcial simulations: Mohsen Bagherimehrab
 
 Quantum hardware implementations: Mohsen Bagherimehrab and Luis Mantilla Calderon
+(We acknowledge useful discussions with Mohammad Ghazi Vakili on quantum hardware implementations)
 
 ### Citation:
 ```bash
