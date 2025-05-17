@@ -39,7 +39,24 @@ Then, run the container with
 docker run --rm --env-file .env cpfs-image
 ```
 
+### Contributors
 
+Numerical/classcial simulations: Mohsen Bagherimehrab
+Quantum hardware implementations: Mohsen Bagherimehrab and Luis Mantilla Calderon
+
+### Citation:
+```bash
+@misc{BMB+25,
+      title={Faster Algorithmic Quantum and Classical Simulations by Corrected Product Formulas}, 
+      author={Mohsen Bagherimehrab and Luis Mantilla Calderon and Dominic W. Berry and Philipp Schleich and Mohammad Ghazi Vakili and Abdulrahman Aldossary          and Jorge A. Campos Gonzalez Angulo and Christoph Gorgulla and Alan Aspuru-Guzik},
+      year={2025},
+      eprint={2409.08265},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2409.08265},
+      doi={10.48550/arXiv.2409.08265}
+}
+```
 
 ### References
 
