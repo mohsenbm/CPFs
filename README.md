@@ -1,8 +1,9 @@
 # Corrected Product Formulas
 
-### Description
+[![arXiv](https://img.shields.io/badge/arXiv:2409.08265v3-a62c2b.svg)](https://arxiv.org/abs/2409.08265)
+[![DOI](https://img.shields.io/badge/DOI:10.48550/arXiv.2409.08265-0077C8.svg)](https://arxiv.org/abs/2409.08265)
 
-This repository contains all the codes used for [arXiv:2409.08265](https://arxiv.org/abs/2409.08265) [1]. It contains multiple implementations of Corrected Product Formulas (CPFs) and code to perform time evolution of the Isign model. We benchmark the time evolution obtained via CPFs and PFs against the exact time evolution of the Ising model obtained following the method described in Refs. [2,3].
+This repository contains all the codes used for [arXiv:2409.08265](https://arxiv.org/abs/2409.08265) [1]. It contains multiple implementations of Corrected Product Formulas (CPFs) and code to perform time evolution. We use various Hamiltonians for classcial simulations. Fo quantum hardware implementations, we use Ising model and benchmark its time evolution obtained via CPFs and PFs against the exact time evolution of the Ising model obtained following the method described in Refs. [2,3].
 
 ### Installation
 
@@ -47,6 +48,7 @@ Quantum hardware implementations: Mohsen Bagherimehrab and Luis Mantilla Caldero
 (We acknowledge useful discussions with Mohammad Ghazi Vakili on quantum hardware implementations)
 
 ### Citation:
+If you use this implementation or results from the paper, please cite our work as
 ```bash
 @misc{BMB+25,
       title={Faster Algorithmic Quantum and Classical Simulations by Corrected Product Formulas}, 
