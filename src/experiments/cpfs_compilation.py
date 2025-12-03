@@ -1,8 +1,8 @@
 import numpy as np
 import time
 
-from src.models.hubbard_model import *
-from src.evolution.cpfs_compiled import *
+from cpfs.models.hubbard_model import *
+from cpfs.evolution.cpfs_compiled import *
 
 import matplotlib.pyplot as plt
 

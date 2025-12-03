@@ -3,14 +3,14 @@ from dotenv import load_dotenv
 
 import numpy as np
 
-from src.models.ising_model import *
-from src.utils import *
-# from src.corrector import *
+from cpfs.models.ising_model import *
+from cpfs.utils import *
+# from cpfs.corrector import *
 
-from src.circuits.pfs_qcircs import *
-from src.circuits.cpfs_qcircs import *
-from src.circuits.ising_model_qcircs import *
-from src.circuits.average_infidelity_qcircs import *
+from cpfs.circuits.pfs_qcircs import *
+from cpfs.circuits.cpfs_qcircs import *
+from cpfs.circuits.ising_model_qcircs import *
+from cpfs.circuits.average_infidelity_qcircs import *
 
 from qiskit_ibm_runtime import QiskitRuntimeService, Session
 from qiskit_ibm_runtime.fake_provider import FakeQuebec

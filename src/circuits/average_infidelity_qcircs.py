@@ -98,9 +98,10 @@ def bogoliubov_transform(J, h, n, dagger=False):
 # quantum circuits for comptuing average infidelity
 #############
 def basis_overlap_qcirc(approxU, exactU, basis=None):
-    """
-    computes basis overlap | <x|exactU^\dag approxU |x>|^2 where |x> represent basis.
-    If basis is None, |x> is the all-zero state.
+    r"""
+    Computes the basis overlap \(|\langle x| exactU^{\dagger} \cdot approxU |x\rangle|^2\),
+    where \(|x\rangle\) denotes a computational basis state.
+    If ``basis`` is ``None``, \(|x\rangle\) is the all-zero state.
     """
     nqubits = exactU.num_qubits
     basis = basis or "0" * nqubits

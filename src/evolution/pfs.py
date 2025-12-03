@@ -1,7 +1,7 @@
 
 import numpy as np
 from scipy import linalg
-from src.utils import operator_norm
+from cpfs.utils import operator_norm
 
 #============================================================
 # Standard product formulas

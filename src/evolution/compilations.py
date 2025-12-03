@@ -1,6 +1,6 @@
 import numpy as np
 from scipy import linalg
-from src.utils import operator_norm, mtx_commutator
+from cpfs.utils import operator_norm, mtx_commutator
 
 #============================================================
 # compilation for correctors

@@ -1,7 +1,7 @@
 import numpy as np
 from qiskit import QuantumCircuit
-from src.models.ising_model import spectrum
-from src.circuits.average_infidelity_qcircs import ffft, bogoliubov_transform
+from cpfs.models.ising_model import spectrum
+from cpfs.circuits.average_infidelity_qcircs import ffft, bogoliubov_transform
 
 def exact_evolution_diagonal_qcirc(J, h, n, t):
     qc = QuantumCircuit(n)  
@@ -11,9 +11,9 @@ def exact_evolution_diagonal_qcirc(J, h, n, t):
     return qc
 
 def Udiag_2site_ising_qcirc(J,h):
-    """
+    r"""
     Quantum circuit for a implementing a unitary U that diagonalizes 2-site Ising model H = J*XX + h*(ZI + IZ)
-    :math:`U^{\dag} H U = D`.
+    :math:`U^{\dagger} H U = D`.
 
     Args:
     J (float):  the nearest-neighbor interaction strength
@@ -32,7 +32,7 @@ def Udiag_2site_ising_qcirc(J,h):
     return qc
 
 def exact_evolution_2site_ising_qcirc(J, h, t):
-    """
+    r"""
     Quantum circuits for exact implementation for e^{-iHt} with H = J*XX + h*(IZ+ZI), the 2-site ising model.
     We write e^{-iHt} = U e^{-iDt} Udag, where U is the unitary that diagonalized U.
     To implement e^{-iDt} we used the expression D = c0*ZI + c1*IZ where c_{0/1} = (lam0 +/- lam1)/2

@@ -9,9 +9,9 @@ except:
     from tqdm import tqdm
 
 from scipy.special import bernoulli
-from src.utils import operator_norm, mtx_commutator
-from src.evolution.compilations import *
-from src.evolution.pfs import *
+from cpfs.utils import operator_norm, mtx_commutator
+from cpfs.evolution.compilations import *
+from cpfs.evolution.pfs import *
 
 #============================================================
 

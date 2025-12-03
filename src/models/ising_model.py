@@ -5,7 +5,7 @@ import openfermion as of
 
 
 def ising_qubit_hamiltonian(n, J, h, periodic=True):
-    """
+    r"""
     Returns the Hamiltonian for the transverse-field Ising model in qubit representation.
     The Hamiltonian is given by: :math:`H = Hxx + Hz`
     where :math:`Hxx = J \sum_{i} X_i X_{i+1}`
