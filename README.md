@@ -3,7 +3,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv:2409.08265v3-a62c2b.svg)](https://arxiv.org/abs/2409.08265)
 [![DOI](https://img.shields.io/badge/DOI:10.48550/arXiv.2409.08265-0077C8.svg)](https://arxiv.org/abs/2409.08265)
 
-This repository contains all the codes used for [arXiv:2409.08265](https://arxiv.org/abs/2409.08265) [1]. It contains multiple implementations of Corrected Product Formulas (CPFs) and code to perform time evolution. We use various Hamiltonians for classcial simulations. Fo quantum hardware implementations, we use Ising model and benchmark its time evolution obtained via CPFs and PFs against the exact time evolution of the Ising model obtained following the method described in Refs. [2,3].
+This repository contains all the codes used for [arXiv:2409.08265](https://arxiv.org/abs/2409.08265). It contains implementations of Product Formulas (PFs) and Corrected Product Formulas (CPFs), and code to perform time evolution. We use various Hamiltonians for classcial simulations. Fo quantum hardware implementations, we use the Ising model and benchmark its time evolution obtained via CPFs and PFs against the exact time evolution of the Ising model.
 
 ### Installation
 
@@ -26,19 +26,7 @@ In our case, the IBMQ channel is `ibm_quantum`, the IBMQ instance is `pinq-quebe
 
 ### Usage
 
-To reproduce the results of the paper, run the code in the `notebooks` folder. The main logic of the code is in the `src` folder. 
-
-If you want to run the code using a docker container, you can first create the docker image with
-
-```bash
-docker build -t cpfs-image .
-```
-
-Then, run the container with
-
-```bash
-docker run --rm --env-file .env cpfs-image
-```
+To reproduce the results of the paper, run the code in the `notebooks` folder. The main logic of the code is in the `src` folder. The date generated from hardware experiments and numerical simulations are in `data` the folder.
 
 ### Contributors
 
@@ -61,11 +49,3 @@ If you use this implementation or results from the paper, please cite our work a
       doi={10.48550/arXiv.2409.08265}
 }
 ```
-
-### References
-
-[1] Bagherimehrab, Mohsen, Luis Mantilla Calderon, Dominic W. Berry, Philipp Schleich, Mohammad Ghazi Vakili, Abdulrahman Aldossary, Jorge A. Angulo, Christoph Gorgulla, and Alan Aspuru-Guzik. "Faster algorithmic quantum and classical simulations by corrected product formulas." arXiv preprint arXiv:2409.08265 (2024).
-
-[2] F. Verstraete, J. I. Cirac, and J. I. Latorre, “Quantum circuits for strongly correlated quantum systems,” Phys. Rev. A 79, 032316 (2009).
-
-[3] A. Cervera-Lierta, “Exact Ising model simulation on a quantum computer,” Quantum 2, 114 (2018).

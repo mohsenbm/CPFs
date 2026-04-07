@@ -1,25 +1,25 @@
 import numpy as np
 from scipy import linalg
+from tqdm import tqdm
 from src.utils import operator_norm, mtx_commutator
+from src.evolution.pfs import *
 
 #============================================================
 # compilation for correctors
 
+def U(a,A,lam):
+    return linalg.expm(a*lam*A)
+
 def X(a, b, A, B, lam):
-    
-    UA = linalg.expm(a*lam*A)
-    UB = linalg.expm(b*lam*B)
-    UnegA = linalg.expm(-a*lam*A)
-    
-    return UA.dot(UB).dot(UnegA)
+    return U(a,A,lam).dot(U(b,B,lam)).dot(U(-a,A,lam))
                           
 def Y(a, b, A, B, lam):
-    return X(lam, a, b, A, B).dot(X(lam, -a, -b, A, B))
+    #return X(a, b, A, B, lam).dot(X(-a, -b, A, B, lam))
+    return U(a,A,lam).dot(U(b,B,lam)).dot(U(-2*a,A,lam)).dot(U(-b,B,lam)).dot(U(a,A,lam))
 
 def Z(a, b, c, A, B, lam):
     UcB = linalg.expm(c*lam*B)
     return UcB.dot(Y(a, b, A, B, lam)).dot(UcB)
-
 
 def corrector(c1, c2, c3, A, B, lam):
     return c1*lam*B + c2*(lam**2)*mtx_commutator(A,B) + c3*(lam**3)*mtx_commutator(B, mtx_commutator(A,B))
@@ -66,7 +66,7 @@ def linear_plus_commutator_compilation(b, c, A, B, lam):
 def compile_UC(c1, c2, c3, A, B, lam):
     """"
     Provides compilation for exp(C)
-    where C = c1*lam*B + c2*lam^2 [A,B] + c3*lam^3 [B,A,B] with lam = -1j*tau.
+    where C = c1*lam*B + c2*lam^2 [A,B] + c3*lam^3 [B,A,B]
     """
     
     # compilation for c2*lam^2 [A,B] + c3*lam^3 [B,A,B] with lam = -1j*tau
@@ -103,3 +103,26 @@ def compile_UnegC(c1, c2, c3, A, B, lam):
 
 def compilation_error(UC, compiledUC):
     return operator_norm(UC - compiledUC)
+
+def compilation_error_list(c1, c2, c3, A, B, ticks):
+    error_list = []
+    for lam in tqdm(ticks):
+        UC = linalg.expm(corrector(c1, c2, c3, A, B, lam))
+        compiledUC = compile_UC(c1, c2, c3, A, B, lam)
+        compile_error = compilation_error(UC, compiledUC)
+        error_list.append(compile_error)
+    return error_list
+
+def compile_UC_CPF2_sym(c, A, B, lam):
+    a = np.cbrt(4*c)
+    return PF2(A, B, a*lam).dot(PF2(A, B, -2*a*lam)).dot(PF2(A, B, a*lam))
+
+def compilation_error_UC_CPF2_sym_list(c, A, B, ticks):
+    error_list = []
+    for lam in tqdm(ticks):
+        C = c*(lam**3)*mtx_commutator(A+2*B, mtx_commutator(A,B)) 
+        UC = linalg.expm(C)
+        compiledUC = compile_UC_CPF2_sym(c, A, B, lam)
+        compile_error = compilation_error(UC, compiledUC)
+        error_list.append(compile_error)
+    return error_list

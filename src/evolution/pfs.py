@@ -2,6 +2,7 @@
 import numpy as np
 from scipy import linalg
 from src.utils import operator_norm
+from tqdm import tqdm
 
 #============================================================
 # Standard product formulas
@@ -46,3 +47,34 @@ def PF_error(order, H, A, B, t, r):
     PF_error = operator_norm(U - appxU)
     
     return PF_step_error, PF_error
+
+def data_PF_error(order, H, A, B, time_ticks, nsteps):
+    """
+    returns error data list for PF of given order:\n
+    list 0: step error\n
+    list 1: total error
+    """
+    error_data = [PF_error(order, H, A, B, t, nsteps) for t in tqdm(time_ticks)]
+    return error_data
+
+
+
+#============================================================
+# PF errors for fixed step size (fixed tau)
+
+def PF_error_fixed_step(order, H, A, B, tau, r):
+        lam = -1j*tau
+        t = r*tau
+        U = linalg.expm(-1j*t*H)
+        appxUtau = PF(order, A, B, lam)
+        appxU = np.linalg.matrix_power(appxUtau, r)
+        PF_error = operator_norm(U - appxU)
+        return PF_error
+
+def data_PF_error_fixed_step(order, H, A, B, tau, steps_list):
+    """
+    returns error data list for PF of given order
+    """
+
+    error_data = [PF_error_fixed_step(order, H, A, B, tau, r) for r in tqdm(steps_list)]
+    return error_data

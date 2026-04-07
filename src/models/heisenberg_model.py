@@ -2,7 +2,7 @@ import cirq
 
 def heisenberg_model(n):
     """
-    Heisenberg model over n sites. We assume n is even number.
+    Heisenberg model over n sites with periodic boundaries. We assume n is even number.
     """
     qs = [cirq.GridQubit(0, i) for i in range(n)]
     ham = cirq.PauliSum()

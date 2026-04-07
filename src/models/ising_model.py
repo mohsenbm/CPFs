@@ -9,7 +9,7 @@ def ising_qubit_hamiltonian(n, J, h, periodic=True):
     Returns the Hamiltonian for the transverse-field Ising model in qubit representation.
     The Hamiltonian is given by: :math:`H = Hxx + Hz`
     where :math:`Hxx = J \sum_{i} X_i X_{i+1}`
-    and :math:`Hx = h \sum_i Z_i` for a line of qubits that are ordered from left to righ, i.e., `q_0 q_1 ... q_{n-1}`
+    and :math:`Hz = h \sum_i Z_i` for a line of qubits that are ordered from left to righ, i.e., `q_0 q_1 ... q_{n-1}`
 
     Args:
         n (int): number of qubits
@@ -80,4 +80,76 @@ def ising_free_fermionic_hamiltoninan(J, h, n):
 
 def spectrum(J, h, k, n):
     return np.sqrt((h + J * np.cos(2*np.pi*k/n))**2 + (J * np.sin(2*np.pi*k/n))**2)
+
+
+def ising_qubit_hamiltonian_2d(rows, cols, J, h, periodic=False):
+    """
+    Constructs the 2D transverse-field Ising Hamiltonian with optional periodic boundary conditions.
+    
+    The Hamiltonian is given by: :math:`H = Hxx + Hz`
+    where :math:`Hxx = J \sum_{<i,j>} X_i X_{j}` + periodic boundary terms: Y-Z-Z...Z-Y along each row and column (if periodic=True)
+    and and :math:`Hz = h \sum_i Z_i` for a line of 2D gird of qubits that are ordered from left to righ and bottom to top.
+
+    Args:
+        rows (int): Number of rows in the 2D grid.
+        cols (int): Number of columns in the 2D grid.
+        J (float): Coupling strength for nearest-neighbor interactions and boundary terms.
+        h (float): Strength of the transverse field (Z terms).
+        periodic (bool): Enables periodic boundary conditions with Y-Z-Z...-Z-Y terms.
+
+    Returns:
+        H (SparsePauliOp): Full Hamiltonian.\n
+        Hxx (SparsePauliOp): XX interaction part (including boundary terms).\n
+        Hz (SparsePauliOp): Z field part.
+    """
+
+    num_qubits = rows * cols
+
+    def qubit_index(i, j):
+        # Reverse indexing to match Qiskit's ordering (right to left, top to bottom)
+        return (rows - 1 - i) * cols + (cols - 1 - j)
+    
+    XX_terms = []
+    Z_terms = []
+
+    # Local XX interactions and Z fields
+    for i in range(rows):
+        for j in range(cols):
+            q = qubit_index(i, j)
+
+            # Local Z field
+            Z_terms.append(("Z", [q], h))
+
+            # Horizontal nearest neighbor (right)
+            if j + 1 < cols:
+                q_right = qubit_index(i, j + 1)
+                XX_terms.append(("XX", [q, q_right], J))
+
+            # Vertical nearest neighbor (down)
+            if i + 1 < rows:
+                q_down = qubit_index(i + 1, j)
+                XX_terms.append(("XX", [q, q_down], J))
+
+    # Periodic boundary terms (YZZ...ZY) for each row and column
+    if periodic and num_qubits > 2:
+        # Add one YZ-...ZY term for each row (horizontal periodicity)
+        for i in range(rows):
+            row_indices = [qubit_index(i, j) for j in range(cols)]
+            if len(row_indices) > 1:
+                pauli_str = "Y" + "Z" * (len(row_indices) - 2) + "Y"
+                XX_terms.append((pauli_str, row_indices, J))
+
+        # Add one YZ...ZY term for each column (vertical periodicity)
+        for j in range(cols):
+            col_indices = [qubit_index(i, j) for i in range(rows)]
+            if len(col_indices) > 1:
+                pauli_str = "Y" + "Z" * (len(col_indices) - 2) + "Y"
+                XX_terms.append((pauli_str, col_indices, J))
+
+    # Construct the SparsePauliOps
+    Hxx = SparsePauliOp.from_sparse_list(XX_terms, num_qubits)
+    Hz = SparsePauliOp.from_sparse_list(Z_terms, num_qubits)
+    H = Hxx + Hz
+
+    return H, Hxx, Hz
 
